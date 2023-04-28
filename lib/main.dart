@@ -1,21 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_startup/app/pages/login/login.dart';
+import 'package:flutter_startup/app/screen/dashboard.dart';
+import 'app/screen/login/login.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Launcher());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Launcher extends StatelessWidget {
+  const Launcher({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
       ),
-      home: const LoginPage(),
+      home: Scaffold(
+        appBar: AppBar(
+          leading: const IconButton(
+            icon: Icon(Icons.menu),
+            tooltip: 'Navigation menu',
+            onPressed: null,
+          ),
+          title: const Text('Start up'),
+          actions: const [
+            IconButton(
+              icon: Icon(Icons.search),
+              tooltip: 'Search',
+              onPressed: null,
+            ),
+          ],
+        ),
+        body: const Dashboard(),
+        floatingActionButton: const FloatingActionButton(
+          tooltip: 'Add',
+          onPressed: null,
+          child: Icon(Icons.add),
+        ),
+      ),
     );
   }
 }
