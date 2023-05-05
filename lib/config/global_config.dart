@@ -3,7 +3,7 @@ import 'dart:ui';
 /// global config
 class GlobalConfig {
   /// default dashboard size
-  static const DEFAULT_SIZE = Size(2920, 1080);
+  static const defaultWindowSize = Size(1440, 900);
 
+  static const defaultMenuSize = Size(240, 900);
 }
-

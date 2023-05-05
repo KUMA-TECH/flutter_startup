@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/screen/dashboard.dart';
-import 'app/screen/login/login.dart';
+import 'package:flutter_startup/config/global_config.dart';
+import 'package:flutter_startup/res/theme/theme.dart';
+import 'package:flutter_startup/utils/utilities.dart';
 
 void main() {
+  resizePCWindow(
+      width: GlobalConfig.defaultWindowSize.width,
+      height: GlobalConfig.defaultWindowSize.height);
+
   runApp(const Launcher());
 }
 
@@ -13,9 +19,8 @@ class Launcher extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
+      theme: ThemeProvider.lightTheme(),
+      darkTheme: ThemeProvider.dartTheme(),
       home: Scaffold(
         appBar: AppBar(
           leading: const IconButton(
@@ -32,7 +37,7 @@ class Launcher extends StatelessWidget {
             ),
           ],
         ),
-        body: const Dashboard(),
+        body: DashboardScreen(),
         floatingActionButton: const FloatingActionButton(
           tooltip: 'Add',
           onPressed: null,
