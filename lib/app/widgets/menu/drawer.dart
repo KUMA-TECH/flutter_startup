@@ -32,20 +32,16 @@ class MenuDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     var headerHeight = 132;
     var containerHeight = GlobalConfig.defaultMenuSize.height - headerHeight;
-    return SizedBox(
-      width: GlobalConfig.defaultMenuSize.width,
-      height: GlobalConfig.defaultMenuSize.height,
-      child: Column(
-        children: [
-          const MenuHeader(),
-          SizedBox(
-            width: GlobalConfig.defaultMenuSize.width,
-            height: containerHeight,
-            // color: Colors.white24,
-            child: buildMenuList(context),
-          )
-        ],
-      ),
+    return Column(
+      children: [
+        const MenuHeader(),
+        SizedBox(
+          width: GlobalConfig.defaultMenuSize.width,
+          height: containerHeight,
+          // color: Colors.white24,
+          child: buildMenuList(context),
+        )
+      ],
     );
   }
 }
