@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_startup/data/Menu.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SideMenu extends StatelessWidget {
@@ -8,72 +11,45 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: [
-          DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
-          ),
-          DrawerListTile(
-            title: "JSON 工具",
-            svgSrc: "assets/icons/menu_dashboard.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "加密/解密",
-            svgSrc: "assets/icons/menu_tran.svg",
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Text("eeeeeee")));
-            },
-          ),
-          DrawerListTile(
-            title: "格式化",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "网络",
-            svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "前端",
-            svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "后端",
-            svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "转换",
-            svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "其他",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "文档",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "图片处理",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            title: "文字处理",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),
-        ],
-      ),
+    return FutureBuilder(
+      future: DefaultAssetBundle.of(context)
+          .loadStructuredData('assets/config/menu.json', (value) {
+        Map<String, dynamic> config = jsonDecode(value);
+
+        return Future.value(DrawerEntity.fromJson(config));
+      }),
+      builder: (context, snapshot) {
+        Widget container;
+        if (snapshot.connectionState != ConnectionState.done) {
+          container = const Center(child: CircularProgressIndicator());
+        } else {
+          var header = snapshot.data!.header;
+          var source = snapshot.data!.menus;
+
+          List<Widget> children = [
+            DrawerHeader(
+              child: Image.asset(header.icon),
+            )
+          ];
+
+          children.addAll(source
+              .map((menu) => DrawerListTile(
+                    title: menu.title,
+                    svgSrc: menu.icon ?? '',
+                    press: () {
+                      print(menu.route);
+                    },
+                  ))
+              .toList());
+
+          container = ListView(
+            children: children,
+          );
+        }
+        return Drawer(
+          child: container,
+        );
+      },
     );
   }
 }

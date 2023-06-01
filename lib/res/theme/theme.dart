@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/res/color.dart';
+import 'package:flutter_startup/res/font.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ThemeProvider {
   static ThemeData defaultTheme() {
@@ -7,17 +9,22 @@ class ThemeProvider {
   }
 
   static ThemeData lightTheme() {
-    // var colorScheme = ColorScheme.fromSeed(
-    //   seedColor: Colors.black87,
-    //   primary: Colors.lightBlueAccent,
-    //   primaryContainer: Colors.white54,
-    //   secondaryContainer: Colors.amber,
-    // );
-
-    return ThemeData(colorScheme: lightColorScheme, useMaterial3: true);
+    return ThemeData(
+      colorScheme: lightColorScheme,
+      useMaterial3: true,
+      scaffoldBackgroundColor: lightColorScheme.background,
+      textTheme: GoogleFonts.poppinsTextTheme(lightTextTheme),
+      canvasColor: lightColorScheme.secondary,
+    );
   }
 
   static ThemeData dartTheme() {
-    return ThemeData(colorScheme: darkColorScheme, useMaterial3: true);
+    return ThemeData(
+      colorScheme: darkColorScheme,
+      useMaterial3: true,
+      scaffoldBackgroundColor: darkColorScheme.background,
+      textTheme: GoogleFonts.poppinsTextTheme(darkTextTheme),
+      canvasColor: darkColorScheme.secondary,
+    );
   }
 }
