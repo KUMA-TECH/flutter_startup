@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -17,4 +20,13 @@ Future<void> resizePCWindow({double width = 600, double height = 400}) async {
     await windowManager.show();
     await windowManager.focus();
   });
+}
+
+bool isPC() {
+  try {
+    return Platform.isLinux || Platform.isMacOS || Platform.isWindows;
+  } catch (e) {
+    if (kDebugMode) print('Platform API is unsupported on Web application!!');
+    return false;
+  }
 }

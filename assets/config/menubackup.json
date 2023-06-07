@@ -1,4 +1,5 @@
 {
+    "desc": "菜单功能备份数据",
     "menu": [
         {
             "title": "JSON 工具",
@@ -12,6 +13,7 @@
                 {"title":"JSON转C#实体类", "route":"/"},
                 {"title":"JSON在线编辑器", "route":"/"},
                 {"title":"JSON排序", "route":"/"},
+                {"title":"JSON着色", "route":"/"},
                 {"title":"XML-JSON互转", "route":"/"},
                 {"title":"JSON和GET请求字符串互转", "route":"/"},
                 {"title":"Excel转Json", "route":"/"},
