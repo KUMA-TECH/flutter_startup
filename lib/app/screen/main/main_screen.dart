@@ -1,5 +1,6 @@
 import 'package:flutter_startup/app/screen/dashboard/dashboard_screen.dart';
 import 'package:flutter_startup/app/state/MenuAppController.dart';
+import 'package:flutter_startup/app/widgets/container/dash_container.dart';
 import 'package:flutter_startup/app/widgets/menu/rail_menu.dart';
 import 'package:flutter_startup/app/widgets/menu/side_menu.dart';
 import 'package:flutter_startup/app/widgets/responsive.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_startup/app/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/config/global_config.dart';
 import 'package:provider/provider.dart';
+
+import '../setting/setting.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -32,7 +35,10 @@ class MainScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: DashboardScreen(),
+              child: DashContainer(
+                child: SettingScreen(),
+              ),
+              // child: DashboardScreen(),
             ),
           ],
         ),
