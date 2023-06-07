@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/screen/main/main_screen.dart';
 import 'package:flutter_startup/app/state/MenuAppController.dart';
+import 'package:flutter_startup/app/state/ThemeController.dart';
 import 'package:flutter_startup/config/global_config.dart';
 import 'package:flutter_startup/res/theme/theme.dart';
 import 'package:flutter_startup/utils/utilities.dart';
@@ -21,19 +22,24 @@ class Launcher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'bejson',
-      theme: ThemeProvider.lightTheme(),
-      darkTheme: ThemeProvider.dartTheme(),
-      home: MultiProvider(
+    return MultiProvider(
         providers: [
           ChangeNotifierProvider(
             create: (context) => MenuAppController(),
           ),
+          ChangeNotifierProvider(create: (conttext) => ThemeController())
         ],
-        child: MainScreen(),
-      ),
-    );
+        child: Consumer<ThemeController>(
+          builder: (context, themeController, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'bejson',
+              themeMode: themeController.themeMode,
+              theme: ThemeProvider.lightTheme(),
+              darkTheme: ThemeProvider.dartTheme(),
+              home: const MainScreen(),
+            );
+          },
+        ));
   }
 }

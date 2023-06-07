@@ -447,6 +447,14 @@
                 {"title": "内容文字间隔生成工具", "route":"/"},
                 {"title": "在线彩色文字特效生成工具", "route":"/"}
             ]
+        },
+        {
+            "title": "设置",
+            "icon": "assets/icons/menu_setting.svg",
+            "route": "/",
+            "children": [
+                {"title": "主题设置", "route":"/setting"}
+            ]
         }
     ]
 }
