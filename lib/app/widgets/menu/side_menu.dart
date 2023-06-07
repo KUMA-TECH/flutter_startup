@@ -16,23 +16,16 @@ class SideMenu extends StatelessWidget {
           .loadStructuredData('assets/config/menu.json', (value) {
         Map<String, dynamic> config = jsonDecode(value);
 
-        return Future.value(DrawerEntity.fromJson(config));
+        return Future.value(MenuListEntity.fromJson(config));
       }),
       builder: (context, snapshot) {
         Widget container;
         if (snapshot.connectionState != ConnectionState.done) {
           container = const Center(child: CircularProgressIndicator());
         } else {
-          var header = snapshot.data!.header;
-          var source = snapshot.data!.menus;
-
-          List<Widget> children = [
-            DrawerHeader(
-              child: Image.asset(header.icon),
-            )
-          ];
-
-          children.addAll(source
+          var source = snapshot.data!.menus[0];
+          List<Widget> children = [];
+          children.addAll(source.children!
               .map((menu) => DrawerListTile(
                     title: menu.title,
                     svgSrc: menu.icon ?? '',
@@ -71,11 +64,14 @@ class DrawerListTile extends StatelessWidget {
     return ListTile(
       onTap: press,
       horizontalTitleGap: 0.0,
-      leading: SvgPicture.asset(
-        svgSrc,
-        colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcIn),
-        height: 16,
-      ),
+      leading: svgSrc.isNotEmpty
+          ? SvgPicture.asset(
+              svgSrc,
+              colorFilter:
+                  const ColorFilter.mode(Colors.white54, BlendMode.srcIn),
+              height: 16,
+            )
+          : null,
       title: Text(
         title,
         style: const TextStyle(color: Colors.white54),

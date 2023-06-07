@@ -1,45 +1,40 @@
 // ignore_for_file: file_names
 
-import 'dart:convert';
+class MenuListEntity {
+  final List<MenuItem> menus;
 
-class DrawerEntity {
-  final Header header;
-  final List<Menu> menus;
+  MenuListEntity(this.menus);
 
-  DrawerEntity(this.header, this.menus);
-
-  factory DrawerEntity.fromJson(Map<String, dynamic> json) {
-    var header = Header.fromJson(json['header']);
+  factory MenuListEntity.fromJson(Map<String, dynamic> json) {
     List<dynamic> array = json['menu'];
-
-    List<Menu> menu = array.map((e) => Menu.fromJson(e)).toList();
-    return DrawerEntity(header, menu);
+    List<MenuItem> menu = array.map((e) => MenuItem.fromJson(e)).toList();
+    return MenuListEntity(menu);
   }
 }
 
-class Menu {
+class MenuItem {
   final String title;
   final String? icon;
   final String? route;
 
-  final List<Menu>? children;
+  final List<MenuItem>? children;
 
-  Menu(this.title, this.icon, this.route, this.children);
+  MenuItem(this.title, this.icon, this.route, this.children);
 
-  Menu.fromChild(Map<String, dynamic> json)
+  MenuItem.fromChild(Map<String, dynamic> json)
       : icon = json['icon'],
         title = json['title'],
         route = json['route'],
         children = null;
 
-  factory Menu.fromJson(Map<String, dynamic> json) {
+  factory MenuItem.fromJson(Map<String, dynamic> json) {
     var title = json['title'];
     var route = json['route'];
     var icon = json['icon'];
 
     List<dynamic> cJson = json['children'];
-    var source = cJson.map((e) => Menu.fromChild(e)).toList();
-    return Menu(title, icon, route, source);
+    var source = cJson.map((e) => MenuItem.fromChild(e)).toList();
+    return MenuItem(title, icon, route, source);
   }
 
   Map<String, dynamic> toJson() =>

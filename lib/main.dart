@@ -7,9 +7,11 @@ import 'package:flutter_startup/utils/utilities.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  resizePCWindow(
-      width: GlobalConfig.defaultWindowSize.width,
-      height: GlobalConfig.defaultWindowSize.height);
+  if (isPC()) {
+    resizePCWindow(
+        width: GlobalConfig.defaultWindowSize.width,
+        height: GlobalConfig.defaultWindowSize.height);
+  }
 
   runApp(const Launcher());
 }
