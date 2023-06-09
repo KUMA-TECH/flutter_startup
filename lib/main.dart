@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/screen/main/main_screen.dart';
-import 'package:flutter_startup/app/state/MenuAppController.dart';
+import 'package:flutter_startup/app/state/menu_provider.dart';
 import 'package:flutter_startup/app/state/ThemeController.dart';
 import 'package:flutter_startup/config/global_config.dart';
 import 'package:flutter_startup/res/theme/theme.dart';
@@ -24,9 +24,7 @@ class Launcher extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-            create: (context) => MenuAppController(),
-          ),
+          ChangeNotifierProvider(create: (context) => MenuProvider()),
           ChangeNotifierProvider(create: (conttext) => ThemeController())
         ],
         child: Consumer<ThemeController>(

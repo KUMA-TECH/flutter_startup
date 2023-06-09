@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_startup/data/menu.dart';
+
+class MenuProvider extends ChangeNotifier {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
+  MenuListModel? _model;
+
+  int _selectedIndex = 0;
+  // 二级菜单索引
+  int _selectedSubIndex = 0;
+
+  void updateSelection(int index) {
+    _selectedIndex = index;
+    _selectedSubIndex = 0; // reset sub menu selection
+    notifyListeners();
+  }
+
+  void updateSubSelection(int index) {
+    _selectedSubIndex = index;
+    notifyListeners();
+  }
+
+  void controlMenu() {
+    if (!_scaffoldKey.currentState!.isDrawerOpen) {
+      _scaffoldKey.currentState!.openDrawer();
+    }
+  }
+
+  /// cache menu data for sub menu
+  void cacheMenuModel(MenuListModel model) {
+    _model = model;
+  }
+
+  MenuListModel? get menuModel => _model;
+  int get currentIndex => _selectedIndex;
+  int get currentSubIndex => _selectedSubIndex;
+}

@@ -1,14 +1,14 @@
 // ignore_for_file: file_names
 
-class MenuListEntity {
+class MenuListModel {
   final List<MenuItem> menus;
 
-  MenuListEntity(this.menus);
+  MenuListModel(this.menus);
 
-  factory MenuListEntity.fromJson(Map<String, dynamic> json) {
+  factory MenuListModel.fromJson(Map<String, dynamic> json) {
     List<dynamic> array = json['menu'];
     List<MenuItem> menu = array.map((e) => MenuItem.fromJson(e)).toList();
-    return MenuListEntity(menu);
+    return MenuListModel(menu);
   }
 }
 
