@@ -40,6 +40,7 @@ class _ThemeSettingState extends State<ThemeSetting> {
                 value: 1,
                 groupValue: groupValue,
                 onChanged: (value) {
+                  print("==> ${ThemeMode.dark.index}");
                   setState(() {
                     groupValue = value!;
                     Provider.of<ThemeController>(context, listen: false)
