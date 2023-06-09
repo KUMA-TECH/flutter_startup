@@ -27,7 +27,12 @@ class SideMenu extends StatelessWidget {
                 title: Text(e.title,
                     style: Theme.of(context).textTheme.labelMedium),
                 onTap: () {
-                  print(e.route);
+                  if (e.route?.isNotEmpty ?? false) {
+                    // ignore '/' for now
+                    if (e.route == '/') return;
+
+                    Navigator.pushNamed(context, e.route!);
+                  }
                 });
           })
         ]),

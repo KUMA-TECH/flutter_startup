@@ -24,9 +24,20 @@ Future<void> resizePCWindow({double width = 600, double height = 400}) async {
 
 bool isPC() {
   try {
-    return Platform.isLinux || Platform.isMacOS || Platform.isWindows;
+    return Platform.isLinux ||
+        Platform.isMacOS ||
+        Platform.isWindows ||
+        Platform.isFuchsia;
   } catch (e) {
     if (kDebugMode) print('Platform API is unsupported on Web application!!');
     return false;
   }
+}
+
+bool isMobile() {
+  return Platform.isAndroid || Platform.isIOS;
+}
+
+bool isWeb() {
+  return !isMobile() && !isPC();
 }
