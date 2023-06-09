@@ -1,8 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_startup/data/Menu.dart';
+import 'package:flutter_startup/app/state/menu_provider.dart';
+import 'package:flutter_startup/data/menu.dart';
+import 'package:flutter_startup/res/dimensions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -11,71 +12,26 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: DefaultAssetBundle.of(context)
-          .loadStructuredData('assets/config/menu.json', (value) {
-        Map<String, dynamic> config = jsonDecode(value);
-
-        return Future.value(MenuListEntity.fromJson(config));
-      }),
-      builder: (context, snapshot) {
-        Widget container;
-        if (snapshot.connectionState != ConnectionState.done) {
-          container = const Center(child: CircularProgressIndicator());
-        } else {
-          var source = snapshot.data!.menus[0];
-          List<Widget> children = [];
-          children.addAll(source.children!
-              .map((menu) => DrawerListTile(
-                    title: menu.title,
-                    svgSrc: menu.icon ?? '',
-                    press: () {
-                      print(menu.route);
-                    },
-                  ))
-              .toList());
-
-          container = ListView(
-            children: children,
-          );
-        }
-        return Drawer(
-          child: container,
-        );
-      },
-    );
-  }
-}
-
-class DrawerListTile extends StatelessWidget {
-  const DrawerListTile({
-    Key? key,
-    // For selecting those three line once press "Command+D"
-    required this.title,
-    required this.svgSrc,
-    required this.press,
-  }) : super(key: key);
-
-  final String title, svgSrc;
-  final VoidCallback press;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: press,
-      horizontalTitleGap: 0.0,
-      leading: svgSrc.isNotEmpty
-          ? SvgPicture.asset(
-              svgSrc,
-              colorFilter:
-                  const ColorFilter.mode(Colors.white54, BlendMode.srcIn),
-              height: 16,
-            )
-          : null,
-      title: Text(
-        title,
-        style: const TextStyle(color: Colors.white54),
-      ),
-    );
+    return Consumer<MenuProvider>(builder: (context, provider, child) {
+      MenuListModel? model = provider.menuModel;
+      if (model == null) {
+        return const SizedBox();
+      }
+      var menus = model.menus[provider.currentIndex];
+      return Container(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        child: ListView(children: [
+          const SizedBox(height: defaultPaddingValue),
+          ...menus.children!.map((e) {
+            return ListTile(
+                title: Text(e.title,
+                    style: Theme.of(context).textTheme.labelMedium),
+                onTap: () {
+                  print(e.route);
+                });
+          })
+        ]),
+      );
+    });
   }
 }
