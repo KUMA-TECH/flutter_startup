@@ -1,3 +1,5 @@
+import "dart:developer";
+
 import "package:flutter/material.dart";
 import "package:flutter/src/widgets/framework.dart";
 import "package:flutter_startup/app/screen/setting/components/setting_panel.dart";
@@ -9,6 +11,7 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('build setting page');
     return Center(
       child: Column(
         children: const [SettingPanel(title: "主题设置", child: ThemeSetting())],

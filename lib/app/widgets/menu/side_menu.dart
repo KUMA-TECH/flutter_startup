@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/state/menu_provider.dart';
 import 'package:flutter_startup/data/menu.dart';
 import 'package:flutter_startup/res/dimensions.dart';
+import 'package:flutter_startup/utils/navigator/navigator_compat.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
@@ -23,17 +24,19 @@ class SideMenu extends StatelessWidget {
         child: ListView(children: [
           const SizedBox(height: defaultPaddingValue),
           ...menus.children!.map((e) {
-            return ListTile(
-                title: Text(e.title,
-                    style: Theme.of(context).textTheme.labelMedium),
-                onTap: () {
-                  if (e.route?.isNotEmpty ?? false) {
-                    // ignore '/' for now
-                    if (e.route == '/') return;
-
-                    Navigator.pushNamed(context, e.route!);
-                  }
-                });
+            return Consumer<NavigatorCompat>(
+                builder: (context, navigator, child) {
+              return ListTile(
+                  title: Text(e.title,
+                      style: Theme.of(context).textTheme.labelMedium),
+                  onTap: () {
+                    if (e.route?.isNotEmpty ?? false) {
+                      // ignore '/' for now
+                      if (e.route == '/') return;
+                      navigator.pushNamed(context, e.route!);
+                    }
+                  });
+            });
           })
         ]),
       );

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -22,22 +23,27 @@ Future<void> resizePCWindow({double width = 600, double height = 400}) async {
   });
 }
 
-bool isPC() {
+bool isDesktop() {
   try {
     return Platform.isLinux ||
         Platform.isMacOS ||
         Platform.isWindows ||
         Platform.isFuchsia;
   } catch (e) {
-    if (kDebugMode) print('Platform API is unsupported on Web application!!');
+    log('Platform API is unsupported on Web application!!');
     return false;
   }
 }
 
 bool isMobile() {
-  return Platform.isAndroid || Platform.isIOS;
+  try {
+    return Platform.isAndroid || Platform.isIOS;
+  } catch (e) {
+    log('Platform API is unsupported on Web application!!');
+    return false;
+  }
 }
 
 bool isWeb() {
-  return !isMobile() && !isPC();
+  return !isMobile() && !isDesktop();
 }

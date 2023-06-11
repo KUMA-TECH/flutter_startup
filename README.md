@@ -14,3 +14,12 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+### Navigator
+Support default Flutter SDK navigator, and extends desktop and web application navigation.
+Usage here,
+
+1. add your screen router at router_table.dart
+2. use Consumer<NavigationCompat>(builder) build ui tree
+3. then, you got NavigationCompat.pushNamed api access permission.
