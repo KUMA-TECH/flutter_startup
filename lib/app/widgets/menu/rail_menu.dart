@@ -47,8 +47,10 @@ class _NavRailMenuState extends State<NavRailMenu> {
                   .map((menu) => NavigationRailDestination(
                         icon: SvgPicture.asset(
                           menu.icon ?? '',
-                          colorFilter: const ColorFilter.mode(
-                              Colors.white54, BlendMode.srcIn),
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.onPrimaryContainer,
+                            BlendMode.srcIn,
+                          ),
                           height: Theme.of(context).iconTheme.size,
                         ),
                         // selectedIcon: Icon(Icons.favorite),
@@ -62,21 +64,6 @@ class _NavRailMenuState extends State<NavRailMenu> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Row(
-                  //   children: [
-                  //     const Text('Jackson'),
-                  //     const SizedBox(width: 20),
-                  //     ClipRRect(
-                  //       borderRadius: BorderRadius.circular(100),
-                  //       child: Image.network(
-                  //         'https://images.unsplash.com/photo-1678875922894-7d3210b0787d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDI2fHRvd0paRnNrcEdnfHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=800&q=60',
-                  //         width: 64,
-                  //         height: 64,
-                  //         fit: BoxFit.cover,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                   const SizedBox(height: defaultPaddingValue),
                   Expanded(
                     child: NavigationRail(

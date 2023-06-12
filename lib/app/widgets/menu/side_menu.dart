@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/state/menu_provider.dart';
 import 'package:flutter_startup/data/menu.dart';
 import 'package:flutter_startup/res/dimensions.dart';
 import 'package:flutter_startup/utils/navigator/navigator_compat.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
@@ -21,24 +22,30 @@ class SideMenu extends StatelessWidget {
       var menus = model.menus[provider.currentIndex];
       return Container(
         color: Theme.of(context).colorScheme.primaryContainer,
-        child: ListView(children: [
-          const SizedBox(height: defaultPaddingValue),
-          ...menus.children!.map((e) {
-            return Consumer<NavigatorCompat>(
-                builder: (context, navigator, child) {
-              return ListTile(
-                  title: Text(e.title,
-                      style: Theme.of(context).textTheme.labelMedium),
-                  onTap: () {
-                    if (e.route?.isNotEmpty ?? false) {
-                      // ignore '/' for now
-                      if (e.route == '/') return;
-                      navigator.pushNamed(context, e.route!);
-                    }
-                  });
-            });
-          })
-        ]),
+        child: ListView.builder(
+            padding: const EdgeInsets.only(top: defaultPaddingValue),
+            itemCount: menus.children!.length,
+            itemBuilder: (context, index) {
+              MenuItem e = menus.children![index];
+              return Consumer<NavigatorCompat>(
+                  builder: (context, navigator, child) {
+                return ListTile(
+                    title: Text(
+                      e.title,
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                    selected: true,
+                    selectedColor: Theme.of(context).colorScheme.error,
+                    onTap: () {
+                      if (e.route?.isNotEmpty ?? false) {
+                        // ignore '/' for now
+                        if (e.route == '/') return;
+                        provider.updateSubSelection(index);
+                        navigator.pushNamed(context, e.route!);
+                      }
+                    });
+              });
+            }),
       );
     });
   }

@@ -9,11 +9,11 @@ class MenuProvider extends ChangeNotifier {
 
   int _selectedIndex = 0;
   // 二级菜单索引
-  int _selectedSubIndex = 0;
+  int _selectedSubIndex = -1;
 
   void updateSelection(int index) {
     _selectedIndex = index;
-    _selectedSubIndex = 0; // reset sub menu selection
+    _selectedSubIndex = -1; // reset sub menu selection
     notifyListeners();
   }
 
