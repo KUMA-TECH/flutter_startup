@@ -1,5 +1,6 @@
-import 'dart:io';
+import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,8 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 const THEME_MODE_KEY = 'THEME_MODE_KEY';
 
 class ThemeController extends ChangeNotifier {
-  ThemeMode _mode = ThemeMode.system;
-
   ThemeMode intToMode(int idx) {
     Map<int, ThemeMode> themeDic = {
       0: ThemeMode.system,
@@ -18,21 +17,25 @@ class ThemeController extends ChangeNotifier {
     return themeDic[idx] ?? ThemeMode.system;
   }
 
-  int modeToInt(ThemeMode mode) {
-    return mode.index;
-  }
-
-  // ThemeMode get themeMode => _mode;
-  Future<ThemeMode> get themeMode async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    int? idx = prefs.getInt(THEME_MODE_KEY);
-    return intToMode(idx!);
+  Future<ThemeMode> getThemeMode() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      int idx = prefs.getInt(THEME_MODE_KEY) ?? ThemeMode.system.index;
+      return Future.value(intToMode(idx));
+    } catch (e) {
+      return Future.value(ThemeMode.system);
+    }
   }
 
   void setMode(ThemeMode mode) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt(THEME_MODE_KEY, mode.index);
-    _mode = mode;
-    notifyListeners();
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setInt(THEME_MODE_KEY, mode.index);
+      notifyListeners();
+    } catch (e) {
+      if (kDebugMode) {
+        print('setMode error with: $e');
+      }
+    }
   }
 }

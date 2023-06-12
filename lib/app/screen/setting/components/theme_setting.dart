@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_startup/app/state/ThemeController.dart';
+import 'package:flutter_startup/app/state/theme_controller.dart';
 import 'package:provider/provider.dart';
 
 class ThemeSetting extends StatefulWidget {
@@ -40,7 +40,6 @@ class _ThemeSettingState extends State<ThemeSetting> {
                 value: 1,
                 groupValue: groupValue,
                 onChanged: (value) {
-                  print("==> ${ThemeMode.dark.index}");
                   setState(() {
                     groupValue = value!;
                     Provider.of<ThemeController>(context, listen: false)
