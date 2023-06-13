@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_startup/app/screen/crypto/base64/base64_screen.dart';
+import 'package:flutter_startup/app/screen/crypto/md5/md5_screen.dart';
 import 'package:flutter_startup/app/screen/json/format/json_format.dart';
 import 'package:flutter_startup/app/screen/main/main_screen.dart';
 import 'package:flutter_startup/app/screen/main/overview_screen.dart';
@@ -10,4 +12,6 @@ Map<String, WidgetBuilder> routerTable = {
   '/overview': (context) => const OverviewScreen(),
   '/json': (context) => const JsonFormatScreen(),
   '/setting': (context) => const SettingScreen(),
+  '/md5': (context) => Md5Screen(),
+  '/base64': (context) => Base64Screen(),
 };

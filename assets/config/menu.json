@@ -27,6 +27,14 @@
             "icon": "assets/icons/menu_tran.svg",
             "route": "",
             "children": [
+                { "title": "Base64加密、解密", "route":"/base64" },
+                { "title": "MD5加密", "route":"/md5" },
+                { "title": "MD5解密", "route":"/md5" },
+                { "title": "DES,AES等对称加密解密", "route":"/" },
+                { "title": "RSA,RSA2公钥私钥加密解密", "route":"/" },
+                { "title": "SHA加密", "route":"/" },
+                { "title": "URL编码", "route":"/" },
+                { "title": "UUID在线生成", "route":"/" },
                 { "title": "网址16进制加密", "route":"/" },
                 { "title": "迅雷、快车、旋风URL加/解密工具", "route":"/" },
                 { "title": "在线htpasswd生成器", "route":"/" },
@@ -57,19 +65,11 @@
                 { "title": "GUID随机生成工具", "route":"/" },
                 { "title": "Escape加密工具", "route":"/" },
                 { "title": "Escape解密工具", "route":"/" },
-                { "title": "Base64加密、解密", "route":"/" },
-                { "title": "MD5加密", "route":"/" },
-                { "title": "MD5解密", "route":"/" },
-                { "title": "DES,AES等对称加密解密", "route":"/" },
-                { "title": "RSA,RSA2公钥私钥加密解密", "route":"/" },
-                { "title": "SHA加密", "route":"/" },
                 { "title": "Escape编码", "route":"/" },
-                { "title": "URL编码", "route":"/" },
                 { "title": "Javascript Eval加密解密", "route":"/" },
                 { "title": "Javascript加密混淆", "route":"/" },
                 { "title": "摩斯密码加密解密", "route":"/" },
-                { "title": "unicode中文互转", "route":"/" },
-                { "title": "UUID在线生成", "route":"/" }
+                { "title": "unicode中文互转", "route":"/" }
             ]
         },
         {
