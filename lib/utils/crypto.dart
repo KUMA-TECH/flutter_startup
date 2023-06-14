@@ -47,6 +47,16 @@ class Crypto {
     return base64Decrypt(input);
   }
 
+  String urlEncrypt(String? input) {
+    if (input?.isEmpty ?? true) return '';
+    return Uri.encodeComponent(input!);
+  }
+
+  String urlDecrypt(String? input) {
+    if (input?.isEmpty ?? true) return '';
+    return Uri.decodeComponent(input!);
+  }
+
   /// md5 加密
   String md5Encrypt(String? input) {
     if (input?.isEmpty ?? true) return '';

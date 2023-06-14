@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_startup/app/screen/crypto/crypto_screen.dart';
+import 'package:flutter_startup/res/dimensions.dart';
 
 class Base64Screen extends CryptoScreen {
   Base64Screen({super.key}) : super(title: "Base64加密/解密");
@@ -13,6 +15,30 @@ class Base64Screen extends CryptoScreen {
   @override
   String decode(String? input) {
     return crypto.base64Decrypt(input);
+  }
+
+  @override
+  State<StatefulWidget> createState() => Base64State();
+}
+
+class Base64State extends CryptoState<Base64Screen> {
+  bool _onUrlChecked = false;
+
+  @override
+  Widget? buildHeaderExtension() {
+    return Row(
+      children: [
+        ChoiceChip(
+          // selectedColor: Colors.amber,
+          onSelected: (value) {
+            setState(() => _onUrlChecked = value);
+          },
+          label: const Text("URL编码"),
+          selected: _onUrlChecked,
+        ),
+        const SizedBox(height: defaultPaddingValue),
+      ],
+    );
   }
 
   @override

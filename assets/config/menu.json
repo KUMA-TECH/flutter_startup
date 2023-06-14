@@ -33,19 +33,18 @@
                 { "title": "DES,AES等对称加密解密", "route":"/" },
                 { "title": "RSA,RSA2公钥私钥加密解密", "route":"/" },
                 { "title": "SHA加密", "route":"/" },
-                { "title": "URL编码", "route":"/" },
+                { "title": "URL编码", "route":"/url" },
                 { "title": "UUID在线生成", "route":"/" },
                 { "title": "网址16进制加密", "route":"/" },
+                { "title": "unicode中文互转", "route":"/" },
                 { "title": "迅雷、快车、旋风URL加/解密工具", "route":"/" },
                 { "title": "在线htpasswd生成器", "route":"/" },
                 { "title": "在线Gzip加密解密工具", "route":"/" },
                 { "title": "在线Base32编码加密解密工具", "route":"/" },
                 { "title": "在线md2加密工具", "route":"/" },
+                { "title": "在线md4加密工具", "route":"/" },
                 { "title": "在线Shake加密工具", "route":"/" },
                 { "title": "在线Keccak加密工具", "route":"/" },
-                { "title": "在线md4加密工具", "route":"/" },
-                { "title": "在线免费UTF8编码工具", "route":"/" },
-                { "title": "在线免费UTF8解码工具", "route":"/" },
                 { "title": "Email邮箱地址加密计算工具", "route":"/" },
                 { "title": "vmess地址解析计算工具", "route":"/" },
                 { "title": "ssr/ss地址解析计算工具", "route":"/" },
@@ -68,8 +67,7 @@
                 { "title": "Escape编码", "route":"/" },
                 { "title": "Javascript Eval加密解密", "route":"/" },
                 { "title": "Javascript加密混淆", "route":"/" },
-                { "title": "摩斯密码加密解密", "route":"/" },
-                { "title": "unicode中文互转", "route":"/" }
+                { "title": "摩斯密码加密解密", "route":"/" }
             ]
         },
         {

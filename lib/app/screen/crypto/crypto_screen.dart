@@ -29,13 +29,9 @@ class CryptoScreen extends StatefulWidget {
   String decode(String? input) {
     return '';
   }
-
-  Widget? buildExtension() {
-    return null;
-  }
 }
 
-class CryptoState extends State<CryptoScreen> {
+class CryptoState<T extends CryptoScreen> extends State<T> {
   String? _input;
   String? _output;
 
@@ -49,6 +45,14 @@ class CryptoState extends State<CryptoScreen> {
     setState(() => _input = input);
     String result = widget.decode(input);
     setState(() => _output = result);
+  }
+
+  Widget? buildExtension() {
+    return null;
+  }
+
+  Widget? buildHeaderExtension() {
+    return null;
   }
 
   _buildCrpytoForm() {
@@ -126,9 +130,11 @@ class CryptoState extends State<CryptoScreen> {
       children: [
         DashboardHeader(title: widget.title),
         const SizedBox(height: 3 * defaultPaddingValue),
+        buildHeaderExtension() ?? const SizedBox(),
+        const SizedBox(height: defaultPaddingValue),
         _buildCrpytoForm(),
         const SizedBox(height: 3 * defaultPaddingValue),
-        widget.buildExtension() ?? const SizedBox(),
+        buildExtension() ?? const SizedBox(),
       ],
     );
   }
