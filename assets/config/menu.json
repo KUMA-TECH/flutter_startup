@@ -30,7 +30,7 @@
                 { "title": "Base64加密、解密", "route":"/base64" },
                 { "title": "MD5加密", "route":"/md5" },
                 { "title": "MD5解密", "route":"/md5" },
-                { "title": "DES,AES等对称加密解密", "route":"/" },
+                { "title": "DES,AES等对称加密解密", "route":"/des_aes" },
                 { "title": "RSA,RSA2公钥私钥加密解密", "route":"/" },
                 { "title": "SHA加密", "route":"/" },
                 { "title": "URL编码", "route":"/url" },

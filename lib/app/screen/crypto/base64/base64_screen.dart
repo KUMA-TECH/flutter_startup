@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/screen/crypto/crypto_screen.dart';
-import 'package:flutter_startup/res/dimensions.dart';
 
 class Base64Screen extends CryptoScreen {
   Base64Screen({super.key}) : super(title: "Base64加密/解密");
@@ -29,14 +28,12 @@ class Base64State extends CryptoState<Base64Screen> {
     return Row(
       children: [
         ChoiceChip(
-          // selectedColor: Colors.amber,
           onSelected: (value) {
             setState(() => _onUrlChecked = value);
           },
           label: const Text("URL编码"),
           selected: _onUrlChecked,
         ),
-        const SizedBox(height: defaultPaddingValue),
       ],
     );
   }

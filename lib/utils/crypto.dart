@@ -11,12 +11,12 @@ class Crypto {
     var iv = IV.fromLength(16);
 
     var encrypter = Encrypter(AES(key));
-
-    var result = encrypt
-        ? encrypter.encrypt(input!, iv: iv)
-        : encrypter.decrypt(Encrypted.fromUtf8(input!), iv: iv);
-
-    return result.toString();
+    if (encrypt) {
+      Encrypted e = encrypter.encrypt(input!, iv: iv);
+      return e.base64;
+    } else {
+      return encrypter.decrypt(Encrypted.fromBase64(input!), iv: iv);
+    }
   }
 
   /// base64 加密

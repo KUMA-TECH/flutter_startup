@@ -57,8 +57,8 @@ class CryptoState<T extends CryptoScreen> extends State<T> {
 
   _buildCrpytoForm() {
     return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 1,
@@ -133,7 +133,7 @@ class CryptoState<T extends CryptoScreen> extends State<T> {
         buildHeaderExtension() ?? const SizedBox(),
         const SizedBox(height: defaultPaddingValue),
         _buildCrpytoForm(),
-        const SizedBox(height: 3 * defaultPaddingValue),
+        const SizedBox(height: defaultPaddingValue),
         buildExtension() ?? const SizedBox(),
       ],
     );
