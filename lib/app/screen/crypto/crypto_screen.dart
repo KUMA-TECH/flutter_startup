@@ -81,6 +81,9 @@ class CryptoScreen extends StatefulWidget {
 
   /// 是否可解密
   bool decryptable() => (type == cryptoMD5) ? false : true;
+
+  /// 自动加解密
+  bool auto() => true;
 }
 
 class CryptoState<T extends CryptoScreen> extends State<T> {
@@ -88,13 +91,11 @@ class CryptoState<T extends CryptoScreen> extends State<T> {
   String? _output;
 
   void _encode(String? input) {
-    setState(() => _input = input);
     String result = widget.encode(input);
     setState(() => _output = result);
   }
 
   void _decode(String? input) {
-    setState(() => _input = input);
     String result = widget.decode(input);
     setState(() => _output = result);
   }
@@ -109,6 +110,7 @@ class CryptoState<T extends CryptoScreen> extends State<T> {
 
   _buildCrpytoForm() {
     var decryptable = widget.decryptable();
+    bool auto = widget.auto();
     return Row(children: [
       Expanded(
         flex: 1,
@@ -116,7 +118,11 @@ class CryptoState<T extends CryptoScreen> extends State<T> {
           minLines: widget.minLines,
           maxLines: widget.maxLines,
           textAlignVertical: TextAlignVertical.top,
-          onChanged: ((value) => _encode(value)),
+          onChanged: ((value) {
+            setState(() => _input = value);
+            if (!widget.auto()) return;
+            _encode(value);
+          }),
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Text',

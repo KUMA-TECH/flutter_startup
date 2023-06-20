@@ -2,26 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/screen/crypto/crypto_screen.dart';
 import 'package:flutter_startup/res/dimensions.dart';
 
+/// RSA 公钥加密， 私钥解密
+/// todo RSA2 实现
 class RSAScreen extends CryptoScreen {
-  String secretKey = "";
+  String privateKey = "";
   String publicKey = "";
-  int type = 0; // 0: aes, 1: des
+  int type = 0;
 
   RSAScreen({super.key}) : super(title: "RSA");
 
   @override
   String encode(String? input) {
-    if (secretKey.isEmpty) return "";
+    if (publicKey.isEmpty) return "";
     return type == 0
-        ? crypto.rsa(input, secretKey, '', true)
-        : crypto.rsa(input, secretKey, '', true);
+        ? crypto.rsa(input, privateKey, publicKey, true)
+        : crypto.rsa(input, privateKey, publicKey, true);
   }
 
   @override
   String decode(String? input) {
-    if (secretKey.isEmpty) return "";
-    return crypto.aes(input, secretKey, false);
+    if (privateKey.isEmpty) return "";
+    return type == 0
+        ? crypto.rsa(input, privateKey, publicKey, false)
+        : crypto.rsa(input, privateKey, publicKey, false);
   }
+
+  /// RSA 加解密耗时长，避免自动造成卡顿
+  @override
+  bool auto() => false;
 
   @override
   State<StatefulWidget> createState() => RSAState();
@@ -66,16 +74,10 @@ class RSAState extends CryptoState<RSAScreen> {
     return Column(
       children: [
         TextField(
+          minLines: 3,
+          maxLines: 20,
           onChanged: ((value) {
-            widget.secretKey = value;
-            if (value.isEmpty ||
-                value.length == 16 ||
-                value.length == 24 ||
-                value.length == 32) {
-              setState(() => _errorKey = null);
-            } else {
-              setState(() => _errorKey = "Key length should be 16/24/32");
-            }
+            widget.publicKey = value;
           }),
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
@@ -84,17 +86,12 @@ class RSAState extends CryptoState<RSAScreen> {
             errorText: _errorKey,
           ),
         ),
+        const SizedBox(height: defaultPaddingValue),
         TextField(
+          minLines: 3,
+          maxLines: 20,
           onChanged: ((value) {
-            widget.publicKey = value;
-            if (value.isEmpty ||
-                value.length == 16 ||
-                value.length == 24 ||
-                value.length == 32) {
-              setState(() => _errorKey = null);
-            } else {
-              setState(() => _errorKey = "Key length should be 16/24/32");
-            }
+            widget.privateKey = value;
           }),
           decoration: InputDecoration(
             border: const OutlineInputBorder(),

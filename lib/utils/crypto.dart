@@ -1,19 +1,27 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart';
+import "package:pointycastle/pointycastle.dart" as castle;
 
 class Crypto {
   /// RSA 加密解密
   String rsa(String? input, String privateKey, String publicKey, bool encrypt) {
     if (input?.isEmpty ?? true) return '';
-    // var iv = IV.fromLength(16);
+    final parser = RSAKeyParser();
 
-    var rsa = RSA();
-    var encrypter = Encrypter(rsa);
+    castle.RSAAsymmetricKey? priKey;
+    castle.RSAAsymmetricKey? pubKey;
+    if (privateKey.isNotEmpty) {
+      priKey = parser.parse(privateKey);
+    }
+    if (publicKey.isNotEmpty) {
+      pubKey = parser.parse(publicKey);
+    }
+    var encrypter = Encrypter(RSA(
+        publicKey: pubKey as castle.RSAPublicKey?,
+        privateKey: priKey as castle.RSAPrivateKey?));
     if (encrypt) {
-      Encrypted e = encrypter.encrypt(input!);
-      return e.base64;
+      return encrypter.encrypt(input!).base64;
     } else {
       return encrypter.decrypt(Encrypted.fromBase64(input!));
     }
