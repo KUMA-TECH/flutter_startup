@@ -7,7 +7,7 @@ import 'package:flutter_startup/res/dimensions.dart';
 /// 对称加密
 class SymmetryScreen extends CryptoScreen {
   String secretKey = "";
-  int type = 0;
+  int type = 0; // 0: aes, 1: des
 
   SymmetryScreen({super.key}) : super(title: "对称加密/解密");
 
@@ -16,7 +16,9 @@ class SymmetryScreen extends CryptoScreen {
     // AES/DES
     log('key:$secretKey');
     if (secretKey.isEmpty) return "";
-    return crypto.aes(input, secretKey, true);
+    return type == 0
+        ? crypto.aes(input, secretKey, true)
+        : crypto.des(input, secretKey, true);
   }
 
   @override

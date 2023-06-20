@@ -4,11 +4,32 @@ import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart';
 
 class Crypto {
+  /// RSA 加密解密
+  String rsa(String? input, String privateKey, String publicKey, bool encrypt) {
+    if (input?.isEmpty ?? true) return '';
+    // var iv = IV.fromLength(16);
+
+    var rsa = RSA();
+    var encrypter = Encrypter(rsa);
+    if (encrypt) {
+      Encrypted e = encrypter.encrypt(input!);
+      return e.base64;
+    } else {
+      return encrypter.decrypt(Encrypted.fromBase64(input!));
+    }
+  }
+
   /// AES 加密解密
   String aes(String? input, String keyString, bool encrypt) {
     if (input?.isEmpty ?? true) return '';
+    if (keyString.isEmpty ||
+        keyString.length != 16 ||
+        keyString.length != 24 ||
+        keyString.length != 32) {
+      return '';
+    }
     var key = Key.fromUtf8(keyString);
-    var iv = IV.fromLength(16);
+    var iv = IV.fromLength(keyString.length);
 
     var encrypter = Encrypter(AES(key));
     if (encrypt) {
@@ -17,6 +38,11 @@ class Crypto {
     } else {
       return encrypter.decrypt(Encrypted.fromBase64(input!), iv: iv);
     }
+  }
+
+  /// DES 加密解密
+  String des(String? input, String keyString, bool encrypt) {
+    return '';
   }
 
   /// base64 加密

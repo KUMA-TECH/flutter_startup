@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_startup/app/screen/crypto/base64/base64_screen.dart';
-import 'package:flutter_startup/app/screen/crypto/base64/url_screen.dart';
-import 'package:flutter_startup/app/screen/crypto/md5/md5_screen.dart';
-import 'package:flutter_startup/app/screen/crypto/symmetry/symmetry_screen.dart';
+import 'package:flutter_startup/app/screen/crypto/index.dart';
 import 'package:flutter_startup/app/screen/json/format/json_format.dart';
 import 'package:flutter_startup/app/screen/main/main_screen.dart';
 import 'package:flutter_startup/app/screen/main/overview_screen.dart';
@@ -16,8 +13,15 @@ Map<String, WidgetBuilder> routerTable = {
   '/setting': (context) => const SettingScreen(),
 
   // 加解密
-  '/md5': (context) => Md5Screen(),
-  '/base64': (context) => Base64Screen(),
-  '/url': (context) => URLScreen(),
-  '/des_aes': (context) => SymmetryScreen(),
+  '/desAes': (context) => SymmetryScreen(),
+  '/rsa': (context) => RSAScreen(),
+  '/sha': (context) => SHAScreen(),
+  '/base64': (context) =>
+      CryptoScreen(title: "Base64加密/解密", type: cryptoBase64),
+  '/md5': (context) => CryptoScreen(title: "MD5加密", type: cryptoMD5),
+  '/utf8': (context) => CryptoScreen(title: "UTF8加密/解密", type: cryptoUTF8),
+  '/url': (context) => CryptoScreen(title: "URL加密/解密", type: cryptoURL),
+  // '/uuid': (context) => URLScreen(),
+  // '/uriHex': (context) => URLScreen(),
+  // '/unicode': (context) => URLScreen(),
 };
