@@ -84,6 +84,10 @@ class CryptoScreen extends StatefulWidget {
 
   /// 自动加解密
   bool auto() => true;
+
+  String? encodeButtonText() => null;
+
+  String? encodeLabel() => null;
 }
 
 class CryptoState<T extends CryptoScreen> extends State<T> {
@@ -110,74 +114,78 @@ class CryptoState<T extends CryptoScreen> extends State<T> {
 
   _buildCrpytoForm() {
     var decryptable = widget.decryptable();
-    bool auto = widget.auto();
-    return Row(children: [
-      Expanded(
-        flex: 1,
-        child: TextField(
-          minLines: widget.minLines,
-          maxLines: widget.maxLines,
-          textAlignVertical: TextAlignVertical.top,
-          onChanged: ((value) {
-            setState(() => _input = value);
-            if (!widget.auto()) return;
-            _encode(value);
-          }),
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Text',
-            alignLabelWithHint: true,
-          ),
-        ),
-      ),
-      Padding(
-        padding: defaultPadding,
-        child: Column(children: [
-          ElevatedButton(
-              onPressed: () => {_encode(_input)}, child: const Text("加密")),
-          const SizedBox(height: defaultPaddingValue),
-          decryptable
-              ? ElevatedButton(
-                  onPressed: () => {_decode(_input)}, child: const Text("解密"))
-              : const SizedBox(),
-        ]),
-      ),
-      Expanded(
-        flex: 1,
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          children: [
-            TextField(
-              controller: TextEditingController(text: _output),
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 1,
+            child: TextField(
               minLines: widget.minLines,
               maxLines: widget.maxLines,
-              enabled: false,
-              onChanged: (value) {},
               textAlignVertical: TextAlignVertical.top,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Result',
+              onChanged: ((value) {
+                setState(() => _input = value);
+                if (!widget.auto()) return;
+                _encode(value);
+              }),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: widget.encodeLabel() ?? 'Text',
                 alignLabelWithHint: true,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                right: defaultPaddingValue / 2,
-                bottom: defaultPaddingValue / 2,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  if (_output?.isEmpty ?? true) return;
-                  Clipboard.setData(ClipboardData(text: _output));
-                  toast(context, "Result copied");
-                },
-                icon: const Icon(Icons.copy),
-              ),
+          ),
+          Padding(
+            padding: defaultPadding,
+            child: Column(children: [
+              ElevatedButton(
+                  onPressed: () => {_encode(_input)},
+                  child: Text(widget.encodeButtonText() ?? "加密")),
+              const SizedBox(height: defaultPaddingValue),
+              decryptable
+                  ? ElevatedButton(
+                      onPressed: () => {_decode(_input)},
+                      child: const Text("解密"))
+                  : const SizedBox(),
+            ]),
+          ),
+          Expanded(
+            flex: 1,
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                TextField(
+                  controller: TextEditingController(text: _output),
+                  minLines: widget.minLines,
+                  maxLines: widget.maxLines,
+                  // enabled: false,
+                  onChanged: (value) {},
+                  textAlignVertical: TextAlignVertical.top,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Result',
+                    alignLabelWithHint: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: defaultPaddingValue / 2,
+                    bottom: defaultPaddingValue / 2,
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      if (_output?.isEmpty ?? true) return;
+                      Clipboard.setData(ClipboardData(text: _output));
+                      toast(context, "Result copied");
+                    },
+                    icon: const Icon(Icons.copy),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ]);
+          ),
+        ]);
   }
 
   @override

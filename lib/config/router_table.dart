@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/screen/crypto/index.dart';
+import 'package:flutter_startup/app/screen/crypto/uuid/uuid_screen.dart';
 import 'package:flutter_startup/app/screen/json/format/json_format.dart';
 import 'package:flutter_startup/app/screen/main/main_screen.dart';
 import 'package:flutter_startup/app/screen/main/overview_screen.dart';
@@ -21,7 +22,7 @@ Map<String, WidgetBuilder> routerTable = {
   '/md5': (context) => CryptoScreen(title: "MD5加密", type: cryptoMD5),
   '/utf8': (context) => CryptoScreen(title: "UTF8加密/解密", type: cryptoUTF8),
   '/url': (context) => CryptoScreen(title: "URL加密/解密", type: cryptoURL),
-  // '/uuid': (context) => URLScreen(),
+  '/uuid': (context) => UUIDScreen(),
   // '/uriHex': (context) => URLScreen(),
   // '/unicode': (context) => URLScreen(),
 };
