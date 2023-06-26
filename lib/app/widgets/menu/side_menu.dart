@@ -16,10 +16,11 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MenuProvider>(builder: (context, provider, child) {
       MenuListModel? model = provider.menuModel;
-      if (model == null) {
-        return const SizedBox();
-      }
+      if (model == null) return const SizedBox();
+
       var menus = model.menus[provider.currentIndex];
+      if (menus.children == null) return const SizedBox();
+
       return Container(
         color: Theme.of(context).colorScheme.primaryContainer,
         child: ListView.builder(

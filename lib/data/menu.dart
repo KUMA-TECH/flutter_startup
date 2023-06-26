@@ -32,8 +32,11 @@ class MenuItem {
     var route = json['route'];
     var icon = json['icon'];
 
-    List<dynamic> cJson = json['children'];
-    var source = cJson.map((e) => MenuItem.fromChild(e)).toList();
+    List<MenuItem>? source;
+    if (json.containsKey('children')) {
+      List<dynamic> cJson = json['children'];
+      source = cJson.map((e) => MenuItem.fromChild(e)).toList();
+    }
     return MenuItem(title, icon, route, source);
   }
 

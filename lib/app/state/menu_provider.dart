@@ -22,6 +22,11 @@ class MenuProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String? getRootMenuRoute(int index) {
+    var menu = _model?.menus[index];
+    return menu?.route ?? '';
+  }
+
   void controlMenu() {
     if (!_scaffoldKey.currentState!.isDrawerOpen) {
       _scaffoldKey.currentState!.openDrawer();

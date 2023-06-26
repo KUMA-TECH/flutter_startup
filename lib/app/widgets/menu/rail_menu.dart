@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/state/menu_provider.dart';
 import 'package:flutter_startup/data/menu.dart';
 import 'package:flutter_startup/res/dimensions.dart';
+import 'package:flutter_startup/utils/navigator/navigator_compat.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
@@ -66,31 +68,41 @@ class _NavRailMenuState extends State<NavRailMenu> {
                 children: [
                   const SizedBox(height: defaultPaddingValue),
                   Expanded(
-                    child: NavigationRail(
-                      minWidth: 96,
-                      selectedIndex: provider.currentIndex,
-                      groupAlignment: groupAlignment,
-                      onDestinationSelected: (index) =>
-                          provider.updateSelection(index),
-                      labelType: labelType,
-                      leading: showLeading
-                          ? FloatingActionButton(
-                              elevation: 0,
-                              onPressed: () {
-                                // Add your onPressed code here!
-                              },
-                              child: const Icon(Icons.add),
-                            )
-                          : const SizedBox(),
-                      trailing: showTrailing
-                          ? IconButton(
-                              onPressed: () {
-                                // more functions
-                              },
-                              icon: const Icon(Icons.more_horiz),
-                            )
-                          : const SizedBox(),
-                      destinations: destinations,
+                    child: Consumer<NavigatorCompat>(
+                      builder: (context, navigator, child) {
+                        return NavigationRail(
+                          minWidth: 96,
+                          selectedIndex: provider.currentIndex,
+                          groupAlignment: groupAlignment,
+                          onDestinationSelected: (index) {
+                            provider.updateSelection(index);
+                            // navigate to root menu route
+                            var routeName = provider.getRootMenuRoute(index);
+                            if (routeName?.isNotEmpty ?? false) {
+                              navigator.pushNamed(context, routeName!);
+                            }
+                          },
+                          labelType: labelType,
+                          leading: showLeading
+                              ? FloatingActionButton(
+                                  elevation: 0,
+                                  onPressed: () {
+                                    // Add your onPressed code here!
+                                  },
+                                  child: const Icon(Icons.add),
+                                )
+                              : const SizedBox(),
+                          trailing: showTrailing
+                              ? IconButton(
+                                  onPressed: () {
+                                    // more functions
+                                  },
+                                  icon: const Icon(Icons.more_horiz),
+                                )
+                              : const SizedBox(),
+                          destinations: destinations,
+                        );
+                      },
                     ),
                   ),
                   IconButton(
