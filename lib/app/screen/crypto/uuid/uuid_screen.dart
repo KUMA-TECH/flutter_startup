@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 // ignore: must_be_immutable
 class UUIDScreen extends CryptoScreen {
   final uuid = const Uuid();
-  UUIDScreen({super.key}) : super(title: "UUID");
+  UUIDScreen({super.key}) : super(title: "UUID在线生成");
 
   @override
   String encode(String? input) {

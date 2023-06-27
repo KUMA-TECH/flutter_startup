@@ -1,6 +1,11 @@
 {
     "menu": [
         {
+            "title": "Home",
+            "route": "/overview",
+            "icon": "assets/icons/menu_dashboard.svg"
+        },
+        {
             "title": "JSON 工具",
             "icon": "assets/icons/menu_dashboard.svg",
             "route": "",
@@ -63,6 +68,10 @@
             "icon": "assets/icons/menu_doc.svg",
             "route": "",
             "children": [
+                {"title": "获取你的IP", "route":"/"},
+                {"title": "获取IP信息", "route":"/"},
+                {"title": "常用USER_AGENT", "route":"/"},
+                {"title": "获取您的浏览器信息", "route":"/"},
                 {"title": "在线ip地址随机生成器", "route":"/"},
                 {"title": "在线Useragent随机生成工具", "route":"/"},
                 {"title": "在线 shield badge生成", "route":"/"},
@@ -71,11 +80,7 @@
                 {"title": "在线网络拓扑图制作", "route":"/"},
                 {"title": "模拟HTTP请求工具", "route":"/"},
                 {"title": "在线模拟websocket请求工具", "route":"/"},
-                {"title": "获取你的IP", "route":"/"},
-                {"title": "获取IP信息", "route":"/"},
                 {"title": "IP定位周边信息", "route":"/"},
-                {"title": "获取您的浏览器信息", "route":"/"},
-                {"title": "常用USER_AGENT", "route":"/"},
                 {"title": "IP转数字,数字转IP", "route":"/"},
                 {"title": "TCP/IP子网掩码计算换算", "route":"/"},
                 {"title": "子网掩码换算(新)", "route":"/"},
