@@ -45,6 +45,17 @@
             ]
         },
         {
+            "title": "条码工具",
+            "icon": "assets/icons/menu_task.svg",
+            "route": "",
+            "children": [
+                { "title": "二维码生成器", "route":"/"},
+                { "title": "二维码解析器", "route":"/"},
+                { "title": "条形码生成器", "route":"/"},
+                { "title": "条码解析器", "route":"/"}
+            ]
+        },
+        {
             "title": "格式化",
             "icon": "assets/icons/menu_task.svg",
             "route": "",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_startup/app/state/ThemeController.dart';
+import 'package:flutter_startup/app/state/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class ThemeSetting extends StatefulWidget {
@@ -24,7 +24,7 @@ class _ThemeSettingState extends State<ThemeSetting> {
                 onChanged: (value) {
                   setState(() {
                     groupValue = value!;
-                    Provider.of<ThemeController>(context, listen: false)
+                    Provider.of<ThemeProvider>(context, listen: false)
                         .setMode(ThemeMode.system);
                   });
                 }),
@@ -42,7 +42,7 @@ class _ThemeSettingState extends State<ThemeSetting> {
                 onChanged: (value) {
                   setState(() {
                     groupValue = value!;
-                    Provider.of<ThemeController>(context, listen: false)
+                    Provider.of<ThemeProvider>(context, listen: false)
                         .setMode(ThemeMode.light);
                   });
                 }),
@@ -60,7 +60,7 @@ class _ThemeSettingState extends State<ThemeSetting> {
                 onChanged: (value) {
                   setState(() {
                     groupValue = value!;
-                    Provider.of<ThemeController>(context, listen: false)
+                    Provider.of<ThemeProvider>(context, listen: false)
                         .setMode(ThemeMode.dark);
                   });
                 }),

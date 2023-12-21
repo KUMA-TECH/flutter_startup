@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_startup/app/state/menu_provider.dart';
-import 'package:flutter_startup/app/state/ThemeController.dart';
+import 'package:flutter_startup/app/state/theme_provider.dart';
 import 'package:flutter_startup/config/global_config.dart';
 import 'package:flutter_startup/config/router_table.dart';
 import 'package:flutter_startup/res/theme/theme.dart';
@@ -27,17 +27,17 @@ class Launcher extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => MenuProvider()),
           ChangeNotifierProvider(create: (context) => NavigatorCompat()),
-          ChangeNotifierProvider(create: (conttext) => ThemeController())
+          ChangeNotifierProvider(create: (conttext) => ThemeProvider())
         ],
-        child: Consumer<ThemeController>(
+        child: Consumer<ThemeProvider>(
           builder: (context, themeController, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               routes: routerTable, // default router table configure
               title: 'bejson',
               themeMode: themeController.themeMode,
-              theme: ThemeProvider.lightTheme(),
-              darkTheme: ThemeProvider.dartTheme(),
+              theme: AppTheme.lightTheme(),
+              darkTheme: AppTheme.dartTheme(),
             );
           },
         ));

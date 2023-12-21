@@ -176,7 +176,7 @@ class CryptoState<T extends CryptoScreen> extends State<T> {
                   child: IconButton(
                     onPressed: () {
                       if (_output?.isEmpty ?? true) return;
-                      Clipboard.setData(ClipboardData(text: _output));
+                      Clipboard.setData(ClipboardData(text: _output!));
                       toast(context, "Result copied");
                     },
                     icon: const Icon(Icons.copy),

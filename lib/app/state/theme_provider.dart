@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeController extends ChangeNotifier {
+class ThemeProvider extends ChangeNotifier {
   ThemeMode _mode = ThemeMode.system;
 
   ThemeMode get themeMode => _mode;

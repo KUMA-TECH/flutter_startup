@@ -3,7 +3,7 @@ import 'package:flutter_startup/res/color.dart';
 import 'package:flutter_startup/res/font.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ThemeProvider {
+class AppTheme {
   static ThemeData defaultTheme() {
     return ThemeData(primarySwatch: Colors.amber);
   }
